@@ -43,15 +43,12 @@ def ipv4_packet(newObject,data):
 
 
 #unpack icmp packet
-def icmp_packet(other_data,newObject):
+def icmp_packet(other_data, newObject):
         icmp_type_conv = {'0':'Echo (Ping) Reply','1':'Unassigned','2':'Unassigned','3':'Destination_Unreachable','4':'Source_Quench','5':'Redirect','6':'Alternate_Host_Address','7':'Unassigned','8':'Echo (Ping) Request','9':'Router_Advertisement','10':'Router_Selection','11':'Time_Exceeded','12':'Parameter_Problem','13':'Timestamp','14':'Timestamp_Replay','15':'Information_Request','16':'Information_Reply','17':'Address_Mask_Request','18':'Address_Mask_Reply','19':'Reserved(for Security)',('20','21','22','23','24','25','26','27','28','29'):'Reserved','30':'Traceroute','31':'Datagram_Conversion_Error','32':'Mobile_Host_Redirect','33':'IPv6_Where-Are-You','34':'IPv6 I-Am-Here','35':'Moblie_Registration_Request','36':'Mobile_Registration_Reply','37':'Domain_Name_Request','38':'Domain_Name_Reply','39':'SKIP','40':'Photuris','41':'ICMP_message_utilized_by_experimental_mobility_protocols_such_as_Seamoby'}
-    icmp_type,code,checksum = struct.unpack("! B B H",other_data[:4])
-        icmp_type,checksum = icmp_type_conv[str(icmp_type)],"0x%x"%checksum
-#        outfile.write(blue_color+"[*]Internet Control Message Protocol[ICMP]:"+end_color)
-#	outfile.write("\tICMP_type:",icmp_type,"  Code:",code,"  Checksum:",checksum)
-        newObject.setICMP(icmp_type,code,checksum,str(other_data[4:]))
-        return other_data[4:],newObject
-
+        icmp_type, code, checksum = struct.unpack("! B B H", other_data[:4])
+        icmp_type, checksum = icmp_type_conv[str(icmp_type)], "0x%x" % checksum
+        newObject.setICMP(icmp_type, code, checksum, str(other_data[4:]))
+        return other_data[4:], newObject
 
 
 
