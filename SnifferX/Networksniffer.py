@@ -93,6 +93,7 @@ def unpackEthernetPack(raw_data, doPrint, seloption):
         newObject = arp_packet(data_1, newObject)
 
     if doPrint == 1:
+        print(pink_color, "\n-----------------------PACKET FILTER----------------------", end=end_color)
         printPacket(newObject, seloption)
 
     sys.stdout.flush()
