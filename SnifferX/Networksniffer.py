@@ -67,8 +67,8 @@ def arp_packet(data_1,newObject):   #   //https://www.iana.org/assignments/arp-p
     hrd_type,proto_type,hrd_len,proto_len,opcode,sender_mac,sender_ip,dest_mac,dest_ip=struct.unpack("!HHBBH6s4s6s4s",data_1[:28])
 #        outfile.write(blue_color,"[*]Address Resolution Protocol[",blue_color,"ARP]:",end_color)
 #	outfile.write("\tHardware_type:",arp_hardware_type["%d"%hrd_type],"  Protocol_type:",eth_type["%d"%socket.htons(proto_type)],"  Hardware_size:",hrd_len,"  Protocol_size:",proto_len,"  Opcode:",arp_op_code_type["%d"%opcode]," Sender_Mac_addr:",get_mac_addr(sender_mac),"  Sender_IP:",yellow_color,ipv4(sender_ip),end_color,"  Target_Mac_addr:",get_mac_addr(dest_mac)," Target_IP:",yellow_color,ipv4(dest_ip),end_color)
-        newObject.setARP(arp_hardware_type["%d"%hrd_type],eth_type["%d"%socket.htons(proto_type)],hrd_len,proto_len,arp_op_code_type["%d"%opcode],get_mac_addr(sender_mac),ipv4(sender_ip),get_mac_addr(dest_mac),ipv4(dest_ip))
-        return newObject
+    newObject.setARP(arp_hardware_type["%d"%hrd_type],eth_type["%d"%socket.htons(proto_type)],hrd_len,proto_len,arp_op_code_type["%d"%opcode],get_mac_addr(sender_mac),ipv4(sender_ip),get_mac_addr(dest_mac),ipv4(dest_ip))
+    return newObject
 
 def unpackEthernetPack(raw_data,doPrint,seloption):
    
@@ -85,9 +85,9 @@ def unpackEthernetPack(raw_data,doPrint,seloption):
     #eth_proto_conv = "%d"%eth_proto
 #   outfile.write('\tProtocol:{}   Destination:{}   Source: {}'.format(eth_type["%d"%eth_proto],dest_mac,src_mac))
     if eth_proto == 8:     #ipv4
-    proto,data_2,newObject = ipv4_packet(newObject,data_1)
+        proto,data_2,newObject = ipv4_packet(newObject,data_1)
     if proto==1:     #icmp -- ipv4
-            data_3,newObject = icmp_packet(data_2,newObject)
+        data_3,newObject = icmp_packet(data_2,newObject)
     elif proto==2:		#IGMP --ipv4
         useless,newObject =  igmp_packet(data_2,newObject)
         data_3 = ""
@@ -103,15 +103,15 @@ def unpackEthernetPack(raw_data,doPrint,seloption):
         data_3 =data_2
 #	    print format_multi_line("\t\t",data_3)
     elif eth_proto == 1544:  #ARP
-        newObject = arp_packet(data_1,newObject)	
+    newObject = arp_packet(data_1,newObject)	
                        
     elif eth_proto == 56710:  #ipv6 
 #       outfile.write(red_color+"This is IPv6 packet..!You haven't Implemented yet!"+end_color)
-        pass
+    pass
     #print red_color+"This is IPv6 packet..!You haven't Implemented yet!"+end_color
     else: 	#EEE 802.1Q (0x8100)
     #outfile.write(red_color+"This is EEE 802.1Q packet...!You haven't Implemented yet!"+end_color)
-        pass
+    pass
     #print red_color+"This is EEE 802.1Q packet...!You haven't Implemented yet!"+end_color
     if doPrint==1:
         printPacket(newObject,seloption)
