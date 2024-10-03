@@ -70,52 +70,31 @@ def arp_packet(data_1,newObject):   #   //https://www.iana.org/assignments/arp-p
     newObject.setARP(arp_hardware_type["%d"%hrd_type],eth_type["%d"%socket.htons(proto_type)],hrd_len,proto_len,arp_op_code_type["%d"%opcode],get_mac_addr(sender_mac),ipv4(sender_ip),get_mac_addr(dest_mac),ipv4(dest_ip))
     return newObject
 
-def unpackEthernetPack(raw_data,doPrint,seloption):
-   
-    #raw = b' '.join(["%0X"%(ord(x)) for x in raw_data])
-    #print "Raw data [hex] :", raw
-    #binraw = b' '.join(["%s"%bin(int(ord(x)))[2:] for x in raw_data])
-    #print "Raw dat [bin] :",binraw
-    #print len(raw_data)
-    dest_mac,src_mac,eth_proto,data_1 = ethernet_frame(raw_data)
-    newObject = Ethernet(eth_proto,dest_mac,src_mac,eth_type["%d"%eth_proto],raw_data)
-    
-#   outfile.write("-"*120)
-#   outfile.write(blue_color+'\n[*]Ethernet Frame:\t'+end_color+'['+pink_color+src_mac+" ==> "+dest_mac+end_color+']')
-    #eth_proto_conv = "%d"%eth_proto
-#   outfile.write('\tProtocol:{}   Destination:{}   Source: {}'.format(eth_type["%d"%eth_proto],dest_mac,src_mac))
-    if eth_proto == 8:     #ipv4
-        proto,data_2,newObject = ipv4_packet(newObject,data_1)
-    if proto==1:     #icmp -- ipv4
-        data_3,newObject = icmp_packet(data_2,newObject)
-    elif proto==2:		#IGMP --ipv4
-        useless,newObject =  igmp_packet(data_2,newObject)
-        data_3 = ""
-    elif proto==6:	 #tcp -- ipv4
-        
-            tcp_segment(data_2,newObject)
-             
-    elif proto==17:   #udp -- ipv4
-        data_3,src_port,dest_port,length = udp_packet(data_2,newObject)
-        check_udp(data_3,src_port,dest_port,length,newObject)
-                               
-    else:
-        data_3 =data_2
-#	    print format_multi_line("\t\t",data_3)
-    elif eth_proto == 1544:  #ARP
-    newObject = arp_packet(data_1,newObject)	
-                       
-    elif eth_proto == 56710:  #ipv6 
-#       outfile.write(red_color+"This is IPv6 packet..!You haven't Implemented yet!"+end_color)
-    pass
-    #print red_color+"This is IPv6 packet..!You haven't Implemented yet!"+end_color
-    else: 	#EEE 802.1Q (0x8100)
-    #outfile.write(red_color+"This is EEE 802.1Q packet...!You haven't Implemented yet!"+end_color)
-    pass
-    #print red_color+"This is EEE 802.1Q packet...!You haven't Implemented yet!"+end_color
-    if doPrint==1:
-        printPacket(newObject,seloption)
-            
+def unpackEthernetPack(raw_data, doPrint, seloption):
+    dest_mac, src_mac, eth_proto, data_1 = ethernet_frame(raw_data)
+    newObject = Ethernet(eth_proto, dest_mac, src_mac, eth_type.get("%d" % eth_proto, "Unknown"), raw_data)
+
+    if eth_proto == 8:  # ipv4
+        proto, data_2, newObject = ipv4_packet(newObject, data_1)
+        if proto == 1:  # icmp -- ipv4
+            data_3, newObject = icmp_packet(data_2, newObject)
+        elif proto == 2:  # IGMP --ipv4
+            useless, newObject = igmp_packet(data_2, newObject)
+            data_3 = ""
+        elif proto == 6:  # tcp -- ipv4
+            tcp_segment(data_2, newObject)
+        elif proto == 17:  # udp -- ipv4
+            data_3, src_port, dest_port, length = udp_packet(data_2, newObject)
+            check_udp(data_3, src_port, dest_port, length, newObject)
+        else:
+            data_3 = data_2
+
+    elif eth_proto == 1544:  # ARP
+        newObject = arp_packet(data_1, newObject)
+
+    if doPrint == 1:
+        printPacket(newObject, seloption)
+
     sys.stdout.flush()
     packets.append(newObject)
     #print packets
