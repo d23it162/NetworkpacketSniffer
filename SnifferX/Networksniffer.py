@@ -58,7 +58,7 @@ def igmp_packet(data_2,newObject):
     Type,max_resp_time,checksum,group_addr = struct.unpack("! B B H 4s",data_2[:8])
 #        outfile.write(blue_color+"[*]Internet Group Management Protocol[IGMP]:"+end_color)
 #	outfile.write("\tType:%s"%igmp_type["%x"%Type]+"  Max_Resp_Time:%.2fsec"%(max_resp_time/10)+"  Checksum:0x%x"%checksum+"  Group_address:"+ipv4(group_addr))
-        newObject.setIGMP("%s"%igmp_type["%x"%Type],"%.2fsec"%(max_resp_time/10),"0x%x"%checksum,ipv4(group_addr),data_2[:8])
+    newObject.setIGMP("%s"%igmp_type["%x"%Type],"%.2fsec"%(max_resp_time/10),"0x%x"%checksum,ipv4(group_addr),data_2[:8])
     return data_2[8:],newObject
 
 def arp_packet(data_1,newObject):   #   //https://www.iana.org/assignments/arp-parameters/arp-parameters.xhtml
