@@ -69,7 +69,7 @@ def arp_packet(data_1,newObject):   #   //https://www.iana.org/assignments/arp-p
 #	outfile.write("\tHardware_type:",arp_hardware_type["%d"%hrd_type],"  Protocol_type:",eth_type["%d"%socket.htons(proto_type)],"  Hardware_size:",hrd_len,"  Protocol_size:",proto_len,"  Opcode:",arp_op_code_type["%d"%opcode]," Sender_Mac_addr:",get_mac_addr(sender_mac),"  Sender_IP:",yellow_color,ipv4(sender_ip),end_color,"  Target_Mac_addr:",get_mac_addr(dest_mac)," Target_IP:",yellow_color,ipv4(dest_ip),end_color)
     newObject.setARP(arp_hardware_type["%d"%hrd_type],eth_type["%d"%socket.htons(proto_type)],hrd_len,proto_len,arp_op_code_type["%d"%opcode],get_mac_addr(sender_mac),ipv4(sender_ip),get_mac_addr(dest_mac),ipv4(dest_ip))
     return newObject
-
+# this: -
 def unpackEthernetPack(raw_data, doPrint, seloption):
     dest_mac, src_mac, eth_proto, data_1 = ethernet_frame(raw_data)
     newObject = Ethernet(eth_proto, dest_mac, src_mac, eth_type.get("%d" % eth_proto, "Unknown"), raw_data)
