@@ -283,7 +283,7 @@ if __name__ == '__main__':
            # for lines in loglines:
            #     data+=lines
             if(fromFile=='1'):
-                doloop=0;
+                doloop=0
             try:
                 raw = open('output.raw','r')
                 data = raw.read()

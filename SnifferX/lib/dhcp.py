@@ -51,7 +51,7 @@ def get_options(data_3):
             index,option_len,subnet_mask = get_serv_addrs(data_3,index) 
             options+="  Subnet_mask:{}".format(subnet_mask)
         elif code==2:  #Time offset
-            print "  Time_offset:{}".format(struct.unpack("!L",data[index+1:index+5]))
+            print ("  Time_offset:{}".format(struct.unpack("!L",data[index+1:index+5])))
             index+=5
         elif code==3: #Router OPtion
             index,option_len,router_addrs = get_serv_addrs(data_3,index)
@@ -336,5 +336,5 @@ def get_file_name(data):
         return name
 
 def dhcpv6(data_6):
-	print "dhcp version 6 is not implemented yet!"
-	pass
+    print ("dhcp version 6 is not implemented yet!")
+    pass
