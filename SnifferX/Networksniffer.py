@@ -104,8 +104,8 @@ def unpackEthernetPack(raw_data, doPrint, seloption):
 def filter(firstVisit=1):
     global Depth,Num,Type
     if firstVisit:
-        print pink_color,"\n-----------------------PACKET FILTER----------------------",end_color
-        print "[*]",yellow_color,"Here you can filter the captured packets. Type 'help' for more info.",end_color
+        print(pink_color, "\n-----------------------PACKET FILTER----------------------", end_color)
+        print("[*]", yellow_color, "Here you can filter the captured packets. Type 'help' for more info.", end_color)
     loop=1
     flag=1
 #    try:
@@ -120,9 +120,9 @@ def filter(firstVisit=1):
                 #Show the filter options
                 flag=0
                 loop=1
-                print "[*]",pink_color,"FILTER OPTIONS:",end_color
+                print("[*]", pink_color, "FILTER OPTIONS:", end_color)
                 filterOptions = open('./banners/filterOptions.txt','r')
-                print filterOptions.read()
+                print(filterOptions.read())
             if filterKey.find("num")!=-1:
                 #print "Num"
                 flag=0
@@ -140,11 +140,11 @@ def filter(firstVisit=1):
                         if len(value)!=0:
                             Num.append(int(value))
                         else:
-                            print "[-]",red_color,"num is invalid...",end_color
+                            print("[-]",red_color,"num is invalid...",end_color)
                             loop=1
                         valueIndex=index
                 except:
-                    print red_color,"There should not be any space around \"=\" and \",\"",end_color
+                    print(red_color,"There should not be any space around \"=\" and \",\"",end_color)
                     loop=1
             if filterKey.find("depth")!=-1:
                 flag=0
@@ -159,10 +159,10 @@ def filter(firstVisit=1):
                     if value=='1' or value=='2' or value=='3':
                         Depth = value
                     else:
-                        print "[-]",red_color,"depth is Invalid...",end_color
+                        print("[-]",red_color,"depth is Invalid...",end_color)
                         loop=1
                 except:
-                    print red_color,"There should not be any space around \"=\"",end_color
+                    print(red_color,"There should not be any space around \"=\"",end_color)
             if filterKey.find("shell")!=-1:
                 flag=0
                 os.system(filterKey[filterKey.find("shell")+6:])
@@ -183,17 +183,17 @@ def filter(firstVisit=1):
                         if len(value)!=0:
                             Type.append(value)
                         else:
-                            print "[-]",red_color,"type is invalid...",end_color
+                            print("[-]",red_color,"type is invalid...",end_color)
                             loop=1
                         valueIndex=index
                 except:
-                    print red_color,"There should not be any space around \"=\" and \",\"",end_color
+                    print(red_color,"There should not be any space around \"=\" and \",\"",end_color)
                     loop=1
             
             
             if flag:
                 loop=1
-                print "[-]",red_color,"Sorry...This filter is invalid",end_color
+                print("[-]",red_color,"Sorry...This filter is invalid",end_color)
 #    except:
         #print green_color,"\nExiting Filter....",end_color
         #sys.exit(0)
@@ -264,14 +264,14 @@ if __name__ == '__main__':
                 raw.close()
             except KeyboardInterrupt:
                 raw.write('End')
-                print green_color,"Exiting Network Sniffer.....:)",end_color
+                print(green_color,"Exiting Network Sniffer.....:)",end_color)
                 sys.exit(0)
         raw.close()
     elif loadoption == '1':
         isfile = open('fromFile','r')
         fromFile = isfile.read()[0]
         if fromFile=='1':
-            print "[*]",purple_color,"File has been loaded...!Now you can filter packets for analysis...:)",end_color
+            print("[*]",purple_color,"File has been loaded...!Now you can filter packets for analysis...:)",end_color)
         startindex = 0
         lastindex = -1
         index = 0
@@ -308,7 +308,7 @@ if __name__ == '__main__':
                     index+=1
 
             except:
-                print green_color,"\nExiting Filter....",end_color
+                print(green_color,"\nExiting Filter....",end_color)
                 #sys.exit(0)
                 break
             filter(firstTime)
@@ -321,7 +321,7 @@ if __name__ == '__main__':
                     filter(0)
                     staticFilter()
             except:
-                print green_color,"\nExiting Filter....",end_color
+                print(green_color,"\nExiting Filter....",end_color)
 
                 
         
