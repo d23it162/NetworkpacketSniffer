@@ -255,18 +255,16 @@ if __name__ == '__main__':
         conn = socket.socket(socket.AF_PACKET,socket.SOCK_RAW,socket.ntohs(3))
         while True:
             try:
-                
-            raw_data,addr=  conn.recvfrom(65535)
-                unpackEthernetPack(raw_data,1,seloption)
-                start  = "-"*20
-                raw = open('output.raw','a')
-                raw.write(raw_data+start)
-                raw.close()
+                raw_data, addr = conn.recvfrom(65535)
+                unpackEthernetPack(raw_data, 1, seloption)
+                start = "-" * 20
+                with open('output.raw', 'a') as raw:
+                    raw.write(raw_data + start)
             except KeyboardInterrupt:
-                raw.write('End')
-                print(green_color,"Exiting Network Sniffer.....:)",end_color)
+                print(green_color, "Exiting Network Sniffer.....:)", end_color)
                 sys.exit(0)
-        raw.close()
+
+
     elif loadoption == '1':
         isfile = open('fromFile','r')
         fromFile = isfile.read()[0]
