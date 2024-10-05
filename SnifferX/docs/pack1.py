@@ -1,5 +1,5 @@
 #!/usr/bin/python
-from pack2 import *
+from .pack2 import *
 class Ethernet(ARP,IPv4):
     'This represents Ehternet part of packet'
     NumOfPackets = 0

@@ -1,5 +1,5 @@
 #!/usr/bin/python
-from pack3 import *
+from .pack3 import *
 
 class IPv4(IGMP,ICMP,UDP,TCP):
     'This represents IPv4 part of whole packet'

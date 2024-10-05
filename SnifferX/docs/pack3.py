@@ -1,5 +1,5 @@
 #!/usr/bin/python
-from pack4 import *
+from .pack4 import *
 
 class IGMP():
     NumOfIGMPPackets = 0
