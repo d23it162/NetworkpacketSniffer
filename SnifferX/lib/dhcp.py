@@ -1,4 +1,4 @@
-from usefull import *
+from .usefull import *
 
 
 

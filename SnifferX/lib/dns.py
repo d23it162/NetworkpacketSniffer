@@ -1,4 +1,4 @@
-from usefull import *
+from .usefull import *
 import struct
 
 #DNS ---https://tools.ietf.org/html/rfc2929

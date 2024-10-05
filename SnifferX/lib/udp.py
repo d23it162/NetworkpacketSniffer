@@ -1,6 +1,6 @@
-from usefull import *
-from dns import *
-from dhcp import *
+from .usefull import *
+from .dns import *
+from .dhcp import *
 
 import struct
 
