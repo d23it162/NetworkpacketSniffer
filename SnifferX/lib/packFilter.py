@@ -16,7 +16,7 @@ allfilter = "tomcruze"*100
 filterText = " "
 def printFilter(sI,eI,lines):
     for index in range(sI,eI):
-        print lines[index]
+        print(lines[index])
 
 def follow(thefile):
     thefile.seek(0,2)
